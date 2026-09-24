@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-- Site: http://localhost:3000
+- Site: http://localhost:3000. It works straight away: until a Sanity project is set up, the site shows the content in `src/content/`, which holds the real 2026 events, Execom and societies, plus clearly labelled sample achievements, publications and posts.
 - Admin (Sanity Studio): http://localhost:3000/studio (needs the Sanity setup below)
 - Design tokens reference: http://localhost:3000/styleguide (hidden from search engines and not in the nav)
 
@@ -29,6 +29,15 @@ Use a **branch-owned Google account or email** for every step, not a personal on
 
 Other admins: in sanity.io/manage go to **Members → Invite**. Give office bearers the Editor role, and keep Administrator for the faculty coordinator and one student.
 
+## Instant updates after publishing (optional)
+
+Pages refresh on their own every 5–60 minutes. To make an edit show up as soon as it's published, add a webhook in sanity.io/manage under **API → Webhooks**:
+
+- URL: `https://<site>/api/revalidate`
+- Triggers: create, update and delete
+- Projection: `{_type}`
+- Secret: a random string. Put the same string in `SANITY_REVALIDATE_SECRET` in Vercel.
+
 ## Useful commands
 
 | Command | What it does |
@@ -44,15 +53,22 @@ Other admins: in sanity.io/manage go to **Members → Invite**. Give office bear
 ```
 sanity.config.ts          Studio config (schemas, sidebar, singleton rules)
 sanity.cli.ts             Config for `npx sanity …` commands
-scripts/seed/             One-time content seed (real 2026 data + assets)
+scripts/seed/             One-time seed: loads src/content + public/content into Sanity
+scripts/content-manifest.mjs  Records image sizes for src/content (npm run content:manifest)
 src/
   app/
     layout.tsx            Root: html/body, Inter font, default metadata
     globals.css           Design tokens (@theme) + base styles
     (site)/               Public site (header + footer)
     studio/[[...tool]]/   Embedded Sanity Studio (full screen, no site chrome)
-  components/layout/      Header, Footer, Container, SocialIcons
+  content/                Starter/offline content (JSON): events, execom, societies, albums…
+  components/
+    layout/               Header, Footer, Container, SocialIcons
+    cards/                Event, Achievement, Post, Member, Society cards
+    home/ about/ execom/ events/ gallery/ join/ filters/ ui/
   lib/
+    content/              Data layer: getEvents(), getExecom()… (Sanity or JSON)
+    options.ts            Shared option lists (departments, event types…)
     site.ts               Fallback branch info, nav
     categories.ts         Category → stripe colour mapping
   sanity/
@@ -66,6 +82,7 @@ src/
 public/
   logos/                  IEEE SB61871 mark, RMKEC crest
   images/                 Campus aerial, Execom group photo
+  content/                Photos, posters and logos used by src/content
 ```
 
 ## Content types
