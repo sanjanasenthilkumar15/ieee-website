@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { Container } from "./Container";
-import { SocialIcons } from "./SocialIcons";
+import { SocialIcons, type SocialKey } from "./SocialIcons";
 import { joinCta, mainNav, site } from "@/lib/site";
 
 const quickLinks = mainNav.filter((n) => ["/about", "/execom", "/events", "/achievements"].includes(n.href));
@@ -11,7 +11,15 @@ const resourceLinks = [
   joinCta,
 ];
 
-export function Footer() {
+export function Footer({
+  email,
+  address,
+  social,
+}: {
+  email?: string;
+  address?: string;
+  social: Partial<Record<SocialKey, string>>;
+}) {
   const year = new Date().getFullYear();
 
   return (
@@ -35,7 +43,7 @@ export function Footer() {
           <p className="mt-4 text-base font-bold text-white">{site.name}</p>
           <p className="mt-1 text-sm">{site.branchCode} · Est. {site.established}</p>
           <p className="mt-4 max-w-sm text-sm leading-relaxed">{site.tagline}</p>
-          <SocialIcons links={site.social} className="mt-5" />
+          <SocialIcons links={social} className="mt-5" />
         </div>
 
         <FooterColumn title="The Branch" links={quickLinks} className="lg:col-span-2" />
@@ -45,16 +53,20 @@ export function Footer() {
         <div className="lg:col-span-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-white">Contact</h2>
           <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
-              <a href={`mailto:${site.contact.email}`} className="hover:text-white">
-                {site.contact.email}
-              </a>
-            </li>
-            <li className="flex gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
-              <span className="leading-relaxed">{site.contact.address}</span>
-            </li>
+            {email && (
+              <li className="flex gap-2.5">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
+                <a href={`mailto:${email}`} className="hover:text-white">
+                  {email}
+                </a>
+              </li>
+            )}
+            {address && (
+              <li className="flex gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/50" aria-hidden="true" />
+                <span className="leading-relaxed">{address}</span>
+              </li>
+            )}
           </ul>
         </div>
       </Container>

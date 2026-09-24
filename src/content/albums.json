@@ -1,0 +1,40 @@
+[
+  {
+    "id": "founding-execom-2026",
+    "title": "Founding Execom 2026",
+    "date": "2026-08-21",
+    "photos": [
+      {
+        "file": "photos/execom-2026-group.jpg",
+        "alt": "The founding IEEE SB RMKEC Execom with faculty coordinators"
+      }
+    ]
+  },
+  {
+    "id": "office-bearers-training-2026",
+    "title": "Training for Newly Elected Office Bearers",
+    "date": "2026-08-05",
+    "event": "office-bearers-training-2026",
+    "photos": [
+      {
+        "file": "photos/office-bearers-training-2026-08-05.jpg",
+        "alt": "A faculty member addresses newly elected office bearers in a classroom"
+      }
+    ]
+  },
+  {
+    "id": "branch-sessions-2026",
+    "title": "Branch Sessions 2026",
+    "date": "2026-09-01",
+    "photos": [
+      {
+        "file": "photos/session-seminar-hall.jpg",
+        "alt": "Students attending an IEEE session in a seminar hall"
+      },
+      {
+        "file": "photos/session-classroom.jpg",
+        "alt": "Students at an IEEE branch session in a classroom"
+      }
+    ]
+  }
+]

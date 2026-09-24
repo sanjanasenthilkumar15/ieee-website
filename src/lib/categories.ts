@@ -2,7 +2,7 @@
  * Category → stripe colour mapping for Event and Achievement cards.
  * Colours are defined as tokens in globals.css (--color-cat-*); this file
  * maps the Sanity category values onto them so cards never hardcode hex.
- * Keep in sync with the option lists in src/sanity/schemaTypes/shared.ts.
+ * Keep in sync with the option lists in src/lib/options.ts.
  */
 
 export const achievementCategories = [

@@ -10,7 +10,8 @@
     "seed": "node --env-file=.env.local scripts/seed/seed.mjs",
     "seed:samples": "node --env-file=.env.local scripts/seed/seed.mjs --with-samples",
     "seed:check": "node scripts/seed/seed.mjs --dry-run --with-samples",
-    "schema:validate": "sanity schema validate"
+    "schema:validate": "sanity schema validate",
+    "content:manifest": "node scripts/content-manifest.mjs"
   },
   "dependencies": {
     "@sanity/client": "^8.7.0",

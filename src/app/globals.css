@@ -81,3 +81,36 @@
     scroll-behavior: auto;
   }
 }
+
+/* ---------------------------------------------------------------
+ * Signature treatments
+ * ------------------------------------------------------------- */
+
+/* One light, uniform grade on all photography so mixed sources match. */
+.photo-grade {
+  filter: saturate(0.92) contrast(1.04) brightness(1.02);
+}
+
+/* Cards: slight lift + shadow on hover (motion is hover/entry only). */
+@layer components {
+  .card-lift {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .card-lift:hover,
+  .card-lift:focus-within {
+    transform: translateY(-3px);
+    box-shadow:
+      0 10px 24px -8px rgb(17 24 39 / 0.18),
+      0 2px 6px -2px rgb(17 24 39 / 0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift:hover {
+    transition: none;
+    transform: none;
+  }
+}

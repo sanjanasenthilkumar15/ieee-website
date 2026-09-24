@@ -1,13 +1,13 @@
 /**
- * Static site configuration used by the layout (header/footer).
- * In Phase 2 the contact/social values move to the Sanity `siteSettings`
- * singleton; these act as fallbacks until that document is filled in.
+ * Static site configuration: navigation and fallback branch details.
+ * Contact email, address and social links shown on the site come from Site
+ * Settings in the Studio; these values are used only when those are empty.
  */
 
 export const site = {
   shortName: "IEEE SB RMKEC",
   name: "IEEE Student Branch, RMK Engineering College",
-  branchCode: "SB #61871",
+  branchCode: "SB61871",
   tagline: "Advancing technology for humanity — from RMKEC, Chennai.",
   established: 2026,
   // IEEE Madras Section is the section for Chennai, in IEEE Region 10 (Asia-Pacific).
@@ -19,12 +19,8 @@ export const site = {
     address:
       "R.M.K. Engineering College, RSM Nagar, Kavaraipettai, Gummidipoondi Taluk, Tiruvallur District, Tamil Nadu 601 206",
   },
-  // TODO(branch): replace with real profile URLs.
-  social: {
-    instagram: "https://www.instagram.com/",
-    linkedin: "https://www.linkedin.com/",
-    youtube: "https://www.youtube.com/",
-  },
+  // Real profile URLs come from Site Settings in the Studio; none shown until set.
+  social: {} as Partial<Record<"instagram" | "linkedin" | "youtube", string>>,
 } as const;
 
 export type NavItem = { label: string; href: string };

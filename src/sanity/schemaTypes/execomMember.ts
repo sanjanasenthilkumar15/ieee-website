@@ -46,6 +46,20 @@ export const execomMember = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "section",
+      title: "Section on the Execom page",
+      type: "string",
+      options: {
+        list: [
+          { title: "Office bearers (Chair, Secretary, Treasurer…)", value: "core" },
+          { title: "Chairs — societies, affinity groups & initiatives", value: "chairs" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "core",
+      hidden: ({ document }) => document?.memberType === "faculty",
+    }),
+    defineField({
       name: "order",
       title: "Display order",
       type: "number",

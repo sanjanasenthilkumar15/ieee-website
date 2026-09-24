@@ -16,16 +16,25 @@ import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 import { createClient } from "@sanity/client";
-import * as data from "./data.mjs";
-import * as samples from "./samples.mjs";
 
+// Content lives in src/content/*.json (also used by the website before Sanity
+// is configured); images live in public/content/.
 const here = dirname(fileURLToPath(import.meta.url));
-const ASSETS = join(here, "assets");
+const ROOT = join(here, "..", "..");
+const ASSETS = join(ROOT, "public", "content");
+const readJson = (f) => JSON.parse(readFileSync(join(ROOT, "src", "content", f), "utf8"));
+const data = {
+  siteSettings: readJson("siteSettings.json"),
+  events: readJson("events.json"),
+  galleryAlbums: readJson("albums.json"),
+  execomMembers: readJson("execom.json"),
+};
+const samples = readJson("samples.json");
 const args = new Set(process.argv.slice(2));
 const DRY = args.has("--dry-run");
 const WITH_SAMPLES = args.has("--with-samples");
 
-const societies = JSON.parse(readFileSync(join(here, "societies.json"), "utf8"));
+const societies = readJson("societies.json");
 
 // ---------- helpers ----------
 const key = () => randomUUID().replace(/-/g, "").slice(0, 12);
@@ -108,11 +117,12 @@ async function build() {
   }
 
   for (const m of data.execomMembers) {
-    const { id, society, ...rest } = m;
+    const { id, society, photo, ...rest } = m;
     docs.push({
       _id: `execom-${m.year}-${id}`,
       _type: "execomMember",
       ...rest,
+      ...(photo ? { photo: await asset(photo, { alt: `${m.name}, ${m.role}` }) } : {}),
       ...(society ? { society: { _type: "reference", _ref: `society-${society}` } } : {}),
     });
   }

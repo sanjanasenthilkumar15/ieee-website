@@ -12,7 +12,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+export function Header({ email }: { email?: string }) {
   const pathname = usePathname();
   // The menu is "open" only for the route it was opened on, so navigating
   // closes it automatically without an effect.
@@ -26,11 +26,13 @@ export function Header() {
         <Container className="flex h-9 items-center justify-between">
           <p>{site.affiliation}</p>
           <div className="flex items-center gap-5">
-            <a href={`mailto:${site.contact.email}`} className="flex items-center gap-1.5 hover:text-white">
-              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-              {site.contact.email}
-            </a>
-            <span className="border-l border-white/25 pl-5">Established {site.established}</span>
+            {email && (
+              <a href={`mailto:${email}`} className="flex items-center gap-1.5 hover:text-white">
+                <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                {email}
+              </a>
+            )}
+            <span className={email ? "border-l border-white/25 pl-5" : ""}>Established {site.established}</span>
           </div>
         </Container>
       </div>

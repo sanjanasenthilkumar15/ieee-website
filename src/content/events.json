@@ -1,0 +1,298 @@
+[
+  {
+    "id": "sb-activities-transforming-ideas-into-impact",
+    "title": "IEEE Student Branch Activities – Transforming Ideas into Impact",
+    "eventType": "meeting",
+    "date": "2026-07-17",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Kick-off meeting introducing the IEEE Student Branch and its plans to students."
+  },
+  {
+    "id": "webinar-01-professional-bodies-certifications-ai-era",
+    "seriesLabel": "Weekly Webinar #1",
+    "title": "Role of Professional Bodies and Certifications to Reshape Career in the AI Era",
+    "eventType": "webinar",
+    "date": "2026-07-22",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "Online",
+    "societies": [
+      "photonics"
+    ],
+    "summary": "Prof. (Dr.) Manpreet Singh Manna on how professional bodies and certifications shape engineering careers in the age of AI.",
+    "speakers": [
+      {
+        "name": "Prof. (Dr.) Manpreet Singh Manna",
+        "designation": "Founding Executive Director, GCC School, Gurugram; Former Director, AICTE; Former Vice-Chancellor, Chandigarh University",
+        "affiliation": "GCC School, Gurugram",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-01.jpg"
+  },
+  {
+    "id": "sb-activities-planning-meeting",
+    "title": "IEEE Student Branch Activities Planning Meeting",
+    "eventType": "meeting",
+    "date": "2026-07-22",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Planning meeting for the branch's first semester of activities."
+  },
+  {
+    "id": "meeting-with-chapter-advisors",
+    "title": "IEEE Student Branch Meeting with Chapter Advisors",
+    "eventType": "meeting",
+    "date": "2026-07-23",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Meeting with faculty advisors of the society student branch chapters."
+  },
+  {
+    "id": "webinar-02-cutting-edge",
+    "seriesLabel": "Weekly Webinar #2",
+    "title": "Cutting Edge",
+    "eventType": "webinar",
+    "date": "2026-07-29",
+    "time": null,
+    "mode": "online",
+    "venue": "Online",
+    "summary": "Second session of the branch's weekly webinar series."
+  },
+  {
+    "id": "webinar-03-cloud-computing-functional-data-analysis",
+    "seriesLabel": "Weekly Webinar #3",
+    "title": "Cloud Computing Meets Functional Data Analysis for Wireless and Network Intelligence",
+    "eventType": "webinar",
+    "date": "2026-08-05",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "Online",
+    "societies": [
+      "crfid"
+    ],
+    "summary": "Prof. Shiwen Mao of Auburn University on combining cloud computing with functional data analysis for wireless and network intelligence.",
+    "speakers": [
+      {
+        "name": "Prof. Shiwen Mao",
+        "affiliation": "Auburn University, USA",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-03.jpg"
+  },
+  {
+    "id": "office-bearers-election-2026",
+    "title": "IEEE Office Bearers Election",
+    "eventType": "meeting",
+    "date": "2026-08-05",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Election of the founding office bearers of the IEEE Student Branch."
+  },
+  {
+    "id": "office-bearers-training-2026",
+    "title": "IEEE Student Branch Training for Newly Elected Office Bearers",
+    "eventType": "workshop",
+    "date": "2026-08-05",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Orientation and training for the newly elected office bearers on running IEEE branch activities."
+  },
+  {
+    "id": "office-bearers-meeting-2026-08-11",
+    "title": "IEEE Office Bearers Meeting",
+    "eventType": "meeting",
+    "date": "2026-08-11",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Meeting of the IEEE Student Branch office bearers."
+  },
+  {
+    "id": "webinar-04-smart-sustainable-cities",
+    "seriesLabel": "Weekly Webinar #4",
+    "title": "Smart and Sustainable Cities: Applications and Challenges",
+    "eventType": "webinar",
+    "date": "2026-08-12",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "YouTube Live",
+    "societies": [
+      "computer-society"
+    ],
+    "summary": "Prof. Mohamed Rawidean Mohd Kassim on smart and sustainable cities, plus IEEE and IEEE Computer Society membership benefits, grants and funding opportunities.",
+    "speakers": [
+      {
+        "name": "Prof. Mohamed Rawidean Mohd Kassim",
+        "designation": "Vice Chair (Geographic Activities), IEEE Computer Society; Senior Researcher and Innovator",
+        "affiliation": "Malaysian Institute of Microelectronic Systems (MIMOS), Malaysia",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-04.jpg"
+  },
+  {
+    "id": "webinar-05-ml-nonlinear-ultrafast-photonics",
+    "seriesLabel": "Weekly Webinar #5",
+    "title": "Machine Learning in Nonlinear and Ultrafast Photonics",
+    "eventType": "webinar",
+    "date": "2026-08-19",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "YouTube Live",
+    "societies": [
+      "photonics",
+      "sscs"
+    ],
+    "summary": "Prof. John Dudley on applying machine learning to nonlinear and ultrafast photonics. Hosted with the IEEE Photonics Society and IEEE Solid-State Circuits Society chapters.",
+    "speakers": [
+      {
+        "name": "Prof. John Dudley",
+        "designation": "Professor; Fundamental Research Chair, Institut Universitaire de France",
+        "affiliation": "Université Marie et Louis Pasteur, Besançon, France",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-05.jpg"
+  },
+  {
+    "id": "inauguration-smart-village-centre-office-bearers",
+    "title": "Inauguration of IEEE Smart Village Student Centre and IEEE Student Branch Office Bearers",
+    "eventType": "ceremony",
+    "date": "2026-08-21",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "featured": false,
+    "summary": "Formal inauguration of the IEEE Smart Village Student Centre and installation of the founding office bearers of the IEEE Student Branch."
+  },
+  {
+    "id": "30-day-membership-challenge",
+    "title": "IEEE Student Branch 30-Day Membership Challenge",
+    "eventType": "membership",
+    "date": "2026-08-23",
+    "time": null,
+    "mode": "hybrid",
+    "venue": "R.M.K. Engineering College",
+    "summary": "A month-long drive encouraging students to join IEEE and its societies."
+  },
+  {
+    "id": "overview-of-ieee-membership-process",
+    "title": "Overview of IEEE Membership Process",
+    "eventType": "membership",
+    "date": "2026-08-26",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "A walkthrough of how to register for IEEE student membership and join societies."
+  },
+  {
+    "id": "webinar-06-next-gen-radar-ai-photonics",
+    "seriesLabel": "Weekly Webinar #6",
+    "title": "Next-Gen Radar Unlocked: AI & Photonics for Robust Interference Resilience",
+    "eventType": "webinar",
+    "date": "2026-08-26",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "Online",
+    "societies": [
+      "photonics",
+      "computer-society"
+    ],
+    "summary": "Prof. Bikash Nakarmi on using AI and photonics to make radar systems resilient to interference.",
+    "speakers": [
+      {
+        "name": "Prof. Bikash Nakarmi",
+        "affiliation": "Nanjing University of Aeronautics and Astronautics, China",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-06.jpg"
+  },
+  {
+    "id": "online-membership-drive-2026-09",
+    "title": "Online Membership Drive",
+    "eventType": "membership",
+    "date": "2026-09-01",
+    "time": "18:00",
+    "endTime": "19:00",
+    "mode": "online",
+    "venue": "Zoom",
+    "summary": "Be a part. Get connected. Grow beyond limits — an online session on the benefits of IEEE membership.",
+    "speakers": [
+      {
+        "name": "Ms. Gandavaram Rushitha",
+        "designation": "Chair, IEEE SB RMKEC (III Year CSE)",
+        "affiliation": "R.M.K. Engineering College",
+        "role": "Resource Person"
+      }
+    ],
+    "poster": "posters/online-membership-drive.jpg"
+  },
+  {
+    "id": "webinar-07-photonics-solutions-country-needs",
+    "seriesLabel": "Weekly Webinar #7",
+    "title": "Photonics Solutions for the Country Needs: Snapshots of My Research Experience",
+    "eventType": "webinar",
+    "date": "2026-09-02",
+    "time": "18:30",
+    "mode": "online",
+    "venue": "YouTube Live",
+    "societies": [
+      "photonics",
+      "ias"
+    ],
+    "summary": "Dr. Sarun Sumriddetchkajorn, Executive Director of NECTEC and IEEE Photonics Society Distinguished Lecturer, on photonics research that serves national needs.",
+    "speakers": [
+      {
+        "name": "Dr. Sarun Sumriddetchkajorn",
+        "designation": "Executive Director, NECTEC; IEEE Photonics Society Distinguished Lecturer; Senior Member, IEEE",
+        "affiliation": "National Electronics and Computer Technology Center (NECTEC), Thailand",
+        "role": "Speaker"
+      }
+    ],
+    "joinUrl": "https://www.youtube.com/live/E9wqShy4Q2I",
+    "poster": "posters/webinar-07.jpg"
+  },
+  {
+    "id": "faculty-coordinators-meeting-2026-09-08",
+    "title": "IEEE Faculty Coordinators Meeting",
+    "eventType": "meeting",
+    "date": "2026-09-08",
+    "time": null,
+    "mode": "in-person",
+    "venue": "R.M.K. Engineering College",
+    "summary": "Meeting of IEEE faculty coordinators across departments."
+  },
+  {
+    "id": "webinar-08-digital-auscultation",
+    "seriesLabel": "Weekly Webinar #8",
+    "title": "Digital Auscultation for Cardiac and Respiratory Systems",
+    "eventType": "webinar",
+    "date": "2026-09-09",
+    "time": "18:30",
+    "endTime": "19:30",
+    "mode": "online",
+    "venue": "Online",
+    "societies": [
+      "sensors"
+    ],
+    "summary": "IEEE Sensors Council Distinguished Lecture by Prof. Yongfu Li on digital auscultation for heart and lung sounds.",
+    "speakers": [
+      {
+        "name": "Prof. Yongfu Li",
+        "designation": "Associate Professor (Tenured), School of Integrated Circuits",
+        "affiliation": "Shanghai Jiao Tong University, China",
+        "role": "Speaker"
+      }
+    ],
+    "poster": "posters/webinar-08.jpg"
+  }
+]

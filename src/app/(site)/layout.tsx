@@ -1,7 +1,12 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { getSiteSettings } from "@/lib/content";
+import { site } from "@/lib/site";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings();
+  const email = settings.contactEmail || site.contact.email;
+  const address = settings.address || site.contact.address;
   return (
     <>
       <a
@@ -10,11 +15,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       >
         Skip to content
       </a>
-      <Header />
+      <Header email={email} />
       <main id="main" className="flex-1">
         {children}
       </main>
-      <Footer />
+      <Footer email={email} address={address} social={{ ...site.social, ...settings.social }} />
     </>
   );
 }
