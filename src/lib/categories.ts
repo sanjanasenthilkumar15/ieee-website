@@ -2,6 +2,7 @@
  * Category → stripe colour mapping for Event and Achievement cards.
  * Colours are defined as tokens in globals.css (--color-cat-*); this file
  * maps the Sanity category values onto them so cards never hardcode hex.
+ * Keep in sync with the option lists in src/sanity/schemaTypes/shared.ts.
  */
 
 export const achievementCategories = [
@@ -15,10 +16,13 @@ export const achievementCategories = [
 export type AchievementCategory = (typeof achievementCategories)[number];
 
 export const eventTypes = [
+  "webinar",
   "workshop",
   "hackathon",
   "competition",
-  "seminar",
+  "meeting",
+  "membership",
+  "ceremony",
   "other",
 ] as const;
 export type EventType = (typeof eventTypes)[number];
@@ -31,8 +35,11 @@ export const categoryMeta: Record<Category, { label: string; color: string }> = 
   award: { label: "Award", color: "var(--color-cat-award)" },
   research: { label: "Research", color: "var(--color-cat-research)" },
   reviewer: { label: "Reviewer Role", color: "var(--color-cat-reviewer)" },
+  webinar: { label: "Webinar", color: "var(--color-ieee-blue)" },
   workshop: { label: "Workshop", color: "var(--color-cat-workshop)" },
-  seminar: { label: "Seminar / Talk", color: "var(--color-ieee-blue)" },
+  meeting: { label: "Meeting", color: "var(--color-cat-other)" },
+  membership: { label: "Membership Drive", color: "var(--color-rmkec-green)" },
+  ceremony: { label: "Ceremony", color: "var(--color-cat-award)" },
   other: { label: "Other", color: "var(--color-cat-other)" },
 };
 

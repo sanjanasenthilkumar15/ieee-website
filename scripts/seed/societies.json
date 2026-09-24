@@ -1,0 +1,222 @@
+[
+  {
+    "id": "computer-society",
+    "name": "IEEE Computer Society",
+    "shortName": "CS",
+    "kind": "society",
+    "website": "https://www.computer.org",
+    "order": 1,
+    "description": "The IEEE Computer Society is the world’s leading organization for computing and IT professionals, delivering the computing community with relevant solutions and trusted resources. With a global network of 370k+ computing professionals, membership connects you with leadership development opportunities, learning courses, and nearly 1 million articles from peer-reviewed periodicals and conferences.",
+    "logo": "societies/computer-society.png"
+  },
+  {
+    "id": "ap-s",
+    "name": "IEEE Antennas and Propagation Society",
+    "shortName": "AP-S",
+    "kind": "society",
+    "website": "https://ieeeaps.org",
+    "order": 2,
+    "description": "AP-S is dedicated to the advancement of electromagnetics frontiers. AP-S fosters antennas, propagation and electromagnetics theory, technology, applications, innovation, and excellence. AP-S is essential to the global electromagnetics community, and is universally recognized for contributions on antennas, propagation, electromagnetics and wireless technologies for the benefit of humanity.",
+    "logo": "societies/ap-s.png"
+  },
+  {
+    "id": "eds",
+    "name": "IEEE Electron Devices Society",
+    "shortName": "EDS",
+    "kind": "society",
+    "website": "https://eds.ieee.org",
+    "order": 3,
+    "description": "EDS promotes excellence in the field of electron devices by enhancing the quality of life for humanity through its members’ contributions in R&D, manufacturing, and application of electronic and ionic devices.",
+    "logo": "societies/eds.png"
+  },
+  {
+    "id": "photonics",
+    "name": "IEEE Photonics Society",
+    "shortName": "IPS",
+    "kind": "society",
+    "website": "https://www.photonicssociety.org",
+    "order": 4,
+    "description": "The Photonics Society is a global forum for students and professionals advancing light‑based technologies, from lasers and integrated photonics to imaging, quantum optics, and optical networks. Acting as the conduit between academia, industry, and standards, we accelerate photonics breakthroughs worldwide.",
+    "logo": "societies/photonics.png"
+  },
+  {
+    "id": "sscs",
+    "name": "IEEE Solid-State Circuits Society",
+    "shortName": "SSCS",
+    "kind": "society",
+    "website": "https://sscs.ieee.org",
+    "order": 5,
+    "description": "SSCS members focus on the design, implementation, and application of solid-state integrated circuits for all applications, including computers, communications, signal processing, and optoelectronics.",
+    "logo": "societies/sscs.png"
+  },
+  {
+    "id": "smc",
+    "name": "IEEE Systems, Man, and Cybernetics Society",
+    "shortName": "SMC",
+    "kind": "society",
+    "website": "https://www.ieeesmc.org",
+    "order": 6,
+    "description": "SMC is a leading IEEE society dedicated to advancing the theory, research, and practical applications of systems science and engineering, human-machine systems, and cybernetics, fostering innovation and interdisciplinary collaboration to address complex real-world challenges.",
+    "logo": "societies/smc.png"
+  },
+  {
+    "id": "embs",
+    "name": "IEEE Engineering in Medicine and Biology Society",
+    "shortName": "EMBS",
+    "kind": "society",
+    "website": "https://www.embs.org",
+    "order": 7,
+    "description": "EMBS is the world's largest international society of biomedical engineers who design the electrical circuits that make a pacemaker run, create the software that reads an MRI, and help develop the wireless technologies that allow patients and doctors to communicate over long distances.",
+    "logo": "societies/embs.png"
+  },
+  {
+    "id": "ctsoc",
+    "name": "IEEE Consumer Technology Society",
+    "shortName": "CTSoc",
+    "kind": "society",
+    "website": "https://ctsoc.ieee.org",
+    "order": 8,
+    "description": "CTSoc is the premier technical organization in the Consumer Electronics industry, working to improve technologies, applications, standards, and products for consumers. It focuses on the design, testing, and use of mass-market devices, systems, software, AI, big data, and services for advanced consumer products.",
+    "logo": "societies/ctsoc.png"
+  },
+  {
+    "id": "bts",
+    "name": "IEEE Broadcast Technology Society",
+    "shortName": "BTS",
+    "kind": "society",
+    "website": "https://bts.ieee.org",
+    "order": 9,
+    "description": "BTS technologies deliver information and entertainment to audiences worldwide. Members access breakthrough research in the fields of broadcasting, including antennas, electronics, power, communications, signal processing, information theory, computers, and audio.",
+    "logo": "societies/bts.png"
+  },
+  {
+    "id": "eps",
+    "name": "IEEE Electronics Packaging Society",
+    "shortName": "EPS",
+    "kind": "society",
+    "website": "https://eps.ieee.org",
+    "order": 10,
+    "description": "EPS is the leading international forum for scientists and engineers engaged in the research, design, and development of revolutionary advances in microsystems packaging and manufacturing.",
+    "logo": "societies/eps.png"
+  },
+  {
+    "id": "itsoc",
+    "name": "IEEE Information Theory Society",
+    "shortName": "ITSoc",
+    "kind": "society",
+    "website": "https://www.itsoc.org",
+    "order": 11,
+    "description": "ITSoc is devoted to advancing the mathematical underpinnings of information, communication, and computation for the benefit of humanity. It explores coding, compression, data transmission, security, quantum information, and machine learning to drive progress in modern technologies.",
+    "logo": "societies/itsoc.png"
+  },
+  {
+    "id": "comsoc",
+    "name": "IEEE Communications Society",
+    "shortName": "ComSoc",
+    "kind": "society",
+    "website": "https://www.comsoc.org",
+    "order": 12,
+    "description": "ComSoc provides a premier international forum for professionals interested in advancing communications technologies including terminals, computers, systems, and operations; transmission media networks; new content/delivery methods; layout; protocol; and architecture.",
+    "logo": "societies/comsoc.png"
+  },
+  {
+    "id": "ras",
+    "name": "IEEE Robotics and Automation Society",
+    "shortName": "RAS",
+    "kind": "society",
+    "website": "https://www.ieee-ras.org",
+    "order": 13,
+    "description": "The IEEE Robotics and Automation Society (RAS) focuses on advancing robotics and automation by fostering research, innovation, and the exchange of scientific and technological knowledge, while developing solutions that benefit the profession, industry, society, and humanity.",
+    "logo": "societies/ras.png"
+  },
+  {
+    "id": "ias",
+    "name": "IEEE Industry Applications Society",
+    "shortName": "IAS",
+    "kind": "society",
+    "website": "https://ias.ieee.org",
+    "order": 14,
+    "description": "The IEEE Industry Applications Society (IAS) is essential because it bridges the gap between abstract academic research and practical factory-floor engineering, translating theoretical discoveries into safe, reliable blueprints for real-world deployment. It fulfills a critical global need by standardizing electrical safety, optimizing energy efficiency, and mitigating severe operational hazards like high-voltage arc flashes in industrial environments. The society's core specialities lie in industrial power systems, advanced power conversion, manufacturing automation, and tailored engineering solutions for heavy sectors like petroleum, mining, and chemical processing.",
+    "logo": "societies/ias.png"
+  },
+  {
+    "id": "biometrics",
+    "name": "IEEE Biometrics Council",
+    "shortName": "BIOM",
+    "kind": "council",
+    "website": "https://ieee-biometrics.org",
+    "order": 15,
+    "description": "The IEEE Biometrics Council is a professional organization dedicated to advancing the science and technology of biometrics. Biometrics refers to the automated recognition of individuals based on their physiological or behavioral characteristics, such as fingerprints, facial features, iris patterns, voice, and gait.",
+    "logo": "societies/biometrics.png"
+  },
+  {
+    "id": "crfid",
+    "name": "IEEE Council on RFID",
+    "shortName": "CRFID",
+    "kind": "council",
+    "website": "https://ieee-rfid.org",
+    "order": 16,
+    "description": "The IEEE Council on RFID focuses on advancing Radio Frequency Identification (RFID) technology and its applications in identification, tracking, authentication, inventory management, logistics, asset monitoring, and smart systems across various industries.",
+    "logo": "societies/crfid.png"
+  },
+  {
+    "id": "ntc",
+    "name": "IEEE Nanotechnology Council",
+    "shortName": "NTC",
+    "kind": "council",
+    "website": "https://ieeenano.org",
+    "order": 17,
+    "description": "The IEEE Nanotechnology Council focuses on advancing the development, research, and practical applications of nanotechnology, including nanoscale materials, devices, systems, and processes, with applications in electronics, healthcare, energy, materials science, and other emerging technologies.",
+    "logo": "societies/ntc.png"
+  },
+  {
+    "id": "systems-council",
+    "name": "IEEE Systems Council",
+    "shortName": "SysC",
+    "kind": "council",
+    "website": "https://ieeesystemscouncil.org",
+    "order": 18,
+    "description": "The IEEE Systems Council focuses on advancing the design, integration, development, and management of complex engineering systems, bringing together hardware, software, people, and processes to create reliable, efficient, and innovative solutions for real-world challenges across multiple disciplines.",
+    "logo": "societies/systems-council.png"
+  },
+  {
+    "id": "ceda",
+    "name": "IEEE Council on Electronic Design Automation",
+    "shortName": "CEDA",
+    "kind": "council",
+    "website": "https://ieee-ceda.org",
+    "order": 19,
+    "description": "Council on Electronic Design Automation is focused on tools and technologies used for designing, simulating, verifying, and developing electronic circuits and VLSI systems.",
+    "logo": "societies/ceda.png"
+  },
+  {
+    "id": "csc",
+    "name": "IEEE Council on Superconductivity",
+    "shortName": "CSC",
+    "kind": "council",
+    "website": "https://ieeecsc.org",
+    "order": 20,
+    "description": "The IEEE Council on Superconductivity focuses on advancing the research, development, and practical applications of superconducting materials, devices, and technologies, with applications in electronics, power systems, high-field magnets, medical equipment, quantum technologies, and other emerging fields.",
+    "logo": "societies/csc.png"
+  },
+  {
+    "id": "tec",
+    "name": "IEEE Transportation Electrification Council",
+    "shortName": "TEC",
+    "kind": "council",
+    "website": "https://tec.ieee.org",
+    "order": 21,
+    "description": "Transportation Electrification Council is focused on technologies for electric transportation, including electric vehicles, batteries, charging systems, and power electronics.",
+    "logo": "societies/tec.png"
+  },
+  {
+    "id": "sensors",
+    "name": "IEEE Sensors Council",
+    "shortName": "SC",
+    "kind": "council",
+    "website": "https://ieee-sensors.org",
+    "order": 22,
+    "description": "The IEEE Sensors Council focuses on advancing the research, development, and application of sensor technologies, covering sensor design, measurement, signal processing, and intelligent sensing systems for applications in healthcare, IoT, automation, environmental monitoring, industrial systems, and smart technologies.",
+    "logo": "societies/sensors.png"
+  }
+]

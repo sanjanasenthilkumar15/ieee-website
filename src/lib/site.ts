@@ -13,10 +13,11 @@ export const site = {
   // IEEE Madras Section is the section for Chennai, in IEEE Region 10 (Asia-Pacific).
   affiliation: "IEEE Madras Section · IEEE Region 10",
   college: "R.M.K. Engineering College",
-  // TODO(branch): replace with the branch-owned email and confirmed address.
+  // TODO(branch): replace with the branch-owned email. Address is from the event posters.
   contact: {
     email: "ieee-sb@example.com",
-    address: "R.M.K. Engineering College, RSM Nagar, Kavaraipettai, Gummidipoondi Taluk, Tiruvallur District, Tamil Nadu 601206",
+    address:
+      "R.M.K. Engineering College, RSM Nagar, Kavaraipettai, Gummidipoondi Taluk, Tiruvallur District, Tamil Nadu 601 206",
   },
   // TODO(branch): replace with real profile URLs.
   social: {

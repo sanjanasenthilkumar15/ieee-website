@@ -6,10 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "node --env-file=.env.local scripts/seed/seed.mjs",
+    "seed:samples": "node --env-file=.env.local scripts/seed/seed.mjs --with-samples",
+    "seed:check": "node scripts/seed/seed.mjs --dry-run --with-samples",
+    "schema:validate": "sanity schema validate"
   },
   "dependencies": {
     "@sanity/client": "^8.7.0",
+    "@sanity/icons": "^5.2.2",
     "@sanity/image-url": "^2.1.1",
     "framer-motion": "^13.4.2",
     "lucide-react": "^1.48.0",
@@ -18,6 +23,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "sanity": "^6.16.0",
+    "server-only": "^0.0.1",
     "styled-components": "^6.5.3"
   },
   "devDependencies": {

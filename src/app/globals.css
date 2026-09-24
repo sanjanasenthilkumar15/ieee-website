@@ -8,9 +8,10 @@
  * CSS variable (e.g. var(--color-ieee-blue)) and a utility class
  * (e.g. bg-ieee-blue, text-rmkec-green, border-cat-award).
  *
- * TODO(branch): confirm final hex values against the supplied logo/crest files.
  *   - IEEE blue #00629B is the official IEEE master-brand blue.
- *   - RMKEC green #1E6B3C is a placeholder forest green pending the crest file.
+ *   - RMKEC green #00704F is sampled from the college's "31 Years of Academic
+ *     Excellence" badge. (The crest shield itself is a darker olive, ~#3D421E,
+ *     which reads muddy next to IEEE blue at UI sizes.)
  */
 @theme static {
   /* ---- Brand ---- */
@@ -18,9 +19,9 @@
   --color-ieee-blue-dark: #004a75; /* hover / pressed */
   --color-ieee-blue-light: #e6f0f6; /* tinted backgrounds */
 
-  --color-rmkec-green: #1e6b3c;
-  --color-rmkec-green-dark: #154d2b;
-  --color-rmkec-green-light: #e8f2ec;
+  --color-rmkec-green: #00704f;
+  --color-rmkec-green-dark: #00553c;
+  --color-rmkec-green-light: #e6f2ed;
 
   /* ---- Neutrals ---- */
   --color-ink: #111827; /* headlines */

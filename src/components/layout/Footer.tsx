@@ -22,9 +22,15 @@ export function Footer() {
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12">
         {/* Identity */}
         <div className="lg:col-span-4">
-          <div className="flex items-center gap-3">
-            <Image src="/logos/ieee-sb.svg" alt="IEEE RMKEC SB61871 logo" width={44} height={44} />
-            <Image src="/logos/rmkec-crest.svg" alt="R.M.K. Engineering College crest" width={34} height={34} />
+          <div className="inline-flex items-center gap-4 rounded-md bg-white px-4 py-2.5">
+            <Image src="/logos/ieee-sb.png" alt="IEEE RMKEC SB61871" width={161} height={72} className="h-10 w-auto" />
+            <Image
+              src="/logos/rmkec-crest.png"
+              alt="R.M.K. Engineering College crest"
+              width={331}
+              height={426}
+              className="h-10 w-auto"
+            />
           </div>
           <p className="mt-4 text-base font-bold text-white">{site.name}</p>
           <p className="mt-1 text-sm">{site.branchCode} · Est. {site.established}</p>

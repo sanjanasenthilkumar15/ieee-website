@@ -39,14 +39,14 @@ export function Header() {
       <Container className="flex h-20 items-center justify-between gap-4">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${site.name} — home`}>
           <Image
-            src="/logos/ieee-sb.svg"
-            alt="IEEE RMKEC Student Branch SB61871 logo"
-            width={52}
-            height={52}
+            src="/logos/ieee-sb.png"
+            alt="IEEE RMKEC SB61871"
+            width={161}
+            height={72}
             priority
-            className="h-12 w-12 shrink-0 sm:h-[52px] sm:w-[52px]"
+            className="h-11 w-auto shrink-0 sm:h-[52px]"
           />
-          <span className="min-w-0 leading-tight">
+          <span className="hidden min-w-0 border-l border-line pl-3 leading-tight min-[360px]:block">
             <span className="block truncate text-base font-extrabold tracking-tight text-ink sm:text-lg">
               IEEE Student Branch
             </span>
@@ -59,11 +59,11 @@ export function Header() {
         <div className="flex items-center gap-4">
           <div className="hidden items-center gap-3 border-l border-line pl-4 md:flex">
             <Image
-              src="/logos/rmkec-crest.svg"
+              src="/logos/rmkec-crest.png"
               alt="R.M.K. Engineering College crest"
-              width={38}
-              height={38}
-              className="h-[38px] w-[38px]"
+              width={331}
+              height={426}
+              className="h-11 w-auto"
             />
             <span className="text-xs leading-tight text-muted">
               Hosted by
