@@ -4,7 +4,7 @@ Built with Next.js (App Router, TypeScript), Tailwind CSS v4 and Sanity. The San
 
 ## Run locally (Windows / macOS / Linux)
 
-Requires Node.js 20.9 or later (Node 22 LTS recommended).
+Requires Node.js 20.9 or later (Node 22 LTS recommended). On Windows you can simply double-click `start-site.bat`: it installs packages on the first run, starts the site and opens it in your browser.
 
 ```bash
 npm install
