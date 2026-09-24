@@ -27,7 +27,7 @@ Use a **branch-owned Google account or email** for every step, not a personal on
 6. Load the starter content with `npm run seed`, or `npm run seed:samples` to also add sample achievements, publications and posts. See `scripts/seed/README.md`.
 7. Run `npm run dev`, open http://localhost:3000/studio and sign in.
 
-Other admins: in sanity.io/manage go to **Members → Invite**. Give office bearers the Editor role, and keep Administrator for the faculty coordinator and one student.
+Other admins: in sanity.io/manage go to **Members → Invite**. On Sanity's Free plan members can only be Administrator or Viewer, so office bearers who edit content need the Administrator role. Remove people when they leave the Execom.
 
 ## Instant updates after publishing (optional)
 
