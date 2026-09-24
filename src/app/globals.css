@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens — IEEE Student Branch RMKEC (SB #61871)
+ *
+ * Tailwind v4 reads theme tokens from this @theme block (it replaces the
+ * old tailwind.config.js `theme.extend`). Every token below becomes both a
+ * CSS variable (e.g. var(--color-ieee-blue)) and a utility class
+ * (e.g. bg-ieee-blue, text-rmkec-green, border-cat-award).
+ *
+ * TODO(branch): confirm final hex values against the supplied logo/crest files.
+ *   - IEEE blue #00629B is the official IEEE master-brand blue.
+ *   - RMKEC green #1E6B3C is a placeholder forest green pending the crest file.
+ */
+@theme static {
+  /* ---- Brand ---- */
+  --color-ieee-blue: #00629b;
+  --color-ieee-blue-dark: #004a75; /* hover / pressed */
+  --color-ieee-blue-light: #e6f0f6; /* tinted backgrounds */
+
+  --color-rmkec-green: #1e6b3c;
+  --color-rmkec-green-dark: #154d2b;
+  --color-rmkec-green-light: #e8f2ec;
+
+  /* ---- Neutrals ---- */
+  --color-ink: #111827; /* headlines */
+  --color-body: #374151; /* body text */
+  --color-muted: #6b7280; /* captions, meta */
+  --color-line: #e5e7eb; /* borders, dividers */
+  --color-surface: #f7f8fa; /* alternate section background */
+  --color-page: #ffffff;
+
+  /* ---- Category palette (card left-edge stripes) ----
+   * Derived from the blue/green base: two blues, two greens, one warm
+   * accent so "award" reads as distinct at a glance. */
+  --color-cat-hackathon: #0092c8; /* bright IEEE-adjacent cyan-blue */
+  --color-cat-competition: #1f3f8f; /* deep navy */
+  --color-cat-award: #b7862a; /* muted gold */
+  --color-cat-research: #2f8f5b; /* mid green */
+  --color-cat-reviewer: #5a4fa3; /* indigo */
+  --color-cat-workshop: #0f7a7a; /* teal, for events */
+  --color-cat-other: #6b7280; /* neutral */
+
+  /* ---- Type ---- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Layout ---- */
+  --container-site: 1200px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Base styles live in @layer base so Tailwind utilities (e.g. text-white) can override them. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-page);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+  }
+
+  /* Headlines: weight/scale contrast is the primary "designed" signal. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ieee-blue);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
