@@ -1,5 +1,7 @@
 # IEEE Student Branch RMKEC — Website (SB61871)
 
+Repository: https://github.com/sanjanasenthilkumar15/ieee-website
+
 Built with Next.js (App Router, TypeScript), Tailwind CSS v4 and Sanity. The Sanity Studio (the admin area) is part of this app, at `/studio`.
 
 ## Run locally (Windows / macOS / Linux)
