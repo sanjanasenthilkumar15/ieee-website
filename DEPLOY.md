@@ -87,6 +87,7 @@ The data folder is `./data` on the host, mounted at `/data`. Put nginx in front 
 | `DATA_DIR` | `./data` | Database and uploads. **Use an absolute path in production** |
 | `PORT` | `3000` | Port for Node. Keep it behind nginx/IIS; don't expose it directly |
 | `SITE_NOINDEX` | – | `true` on test copies, which keeps them out of search engines |
+| `SESSION_SECRET` | – | Optional. Key for signing login cookies; by default a random key is kept in the database. Changing it signs everyone out |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | – | Only for hosts without a terminal (e.g. Vercel). Creates this admin automatically when no accounts exist yet |
 
 These can go in `.env` in the project folder, in the systemd unit, or in `docker-compose.yml`.
@@ -140,4 +141,4 @@ Content and uploads are never touched by a rebuild. The database updates its own
 
 The site can run on hosts like Vercel for a quick review, but they have **no permanent disk**. The admin then shows a yellow banner, and any edits or uploads disappear when the host restarts. Set `SITE_NOINDEX=true` on such copies. Use the college server for the real site.
 
-These hosts have no terminal for `npm run admin:create`. Instead, set `ADMIN_EMAIL`, `ADMIN_PASSWORD` (at least 10 characters) and optionally `ADMIN_NAME` in the host's environment variables, then redeploy. On Vercel that's Project → Settings → Environment Variables. The admin account is recreated each time the host starts fresh. You may occasionally be signed out when the host switches instances; just sign in again.
+These hosts have no terminal for `npm run admin:create`. Instead, set `ADMIN_EMAIL`, `ADMIN_PASSWORD` (at least 10 characters) and optionally `ADMIN_NAME` in the host's environment variables, then redeploy. On Vercel that's Project → Settings → Environment Variables. The admin account is recreated each time the host starts fresh. Such hosts run several copies of the app, each with its own temporary database, so **something you save may not show up on the next page**. Use a review copy to look around the admin, not to enter real content.

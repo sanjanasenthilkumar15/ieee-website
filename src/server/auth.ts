@@ -1,5 +1,5 @@
 import "server-only";
-import { createHash, randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -9,7 +9,8 @@ import { getDb, logActivity } from "./db";
 /**
  * Admin authentication: email + password accounts stored in the site's own
  * database. Passwords are hashed with scrypt (never stored in plain text);
- * sessions are random tokens in an HttpOnly cookie, stored hashed.
+ * sessions are signed (HMAC) tokens in an HttpOnly cookie, so they stay valid
+ * even when several server processes answer requests (e.g. on Vercel).
  */
 
 export type Role = "admin" | "editor";
@@ -20,8 +21,7 @@ export const MIN_PASSWORD_LENGTH = 10;
 
 // ---------- passwords ----------
 
-export function hashPassword(password: string): string {
-  const salt = randomBytes(16);
+export function hashPassword(password: string, salt: Buffer = randomBytes(16)): string {
   const hash = scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1 });
   return `scrypt$${salt.toString("base64")}$${hash.toString("base64")}`;
 }
@@ -88,7 +88,9 @@ function ensureEnvAdmin() {
   const n = (getDb().prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
   if (n > 0) return;
   try {
-    createUser({ email, name: process.env.ADMIN_NAME?.trim() || "Admin", role: "admin", password });
+    // Same salt on every instance → same hash → session cookies work across instances
+    const salt = createHash("sha256").update(`env-admin:${email}`).digest().subarray(0, 16);
+    createUser({ email, name: process.env.ADMIN_NAME?.trim() || "Admin", role: "admin", password }, salt);
     console.log(`Created admin account ${email} from ADMIN_EMAIL / ADMIN_PASSWORD`);
   } catch (err) {
     envAdminProblem = `Couldn’t create the admin account: ${(err as Error).message}`;
@@ -101,18 +103,17 @@ export function userCount(): number {
   return (getDb().prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
 }
 
-export function createUser(input: { email: string; name: string; role: Role; password: string }): User {
+export function createUser(input: { email: string; name: string; role: Role; password: string }, salt?: Buffer): User {
   const id = randomUUID();
   getDb()
     .prepare("INSERT INTO users (id, email, name, role, password_hash) VALUES (?, ?, ?, ?, ?)")
-    .run(id, input.email.trim().toLowerCase(), input.name.trim(), input.role, hashPassword(input.password));
+    .run(id, input.email.trim().toLowerCase(), input.name.trim(), input.role, hashPassword(input.password, salt));
   return toUser(getDb().prepare("SELECT * FROM users WHERE id = ?").get(id) as UserRow);
 }
 
 export function setPassword(userId: string, password: string) {
   getDb().prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hashPassword(password), userId);
-  // Sign out everywhere else after a password change
-  getDb().prepare("DELETE FROM sessions WHERE user_id = ?").run(userId);
+  // Existing session cookies carry a fingerprint of the old hash, so they stop working
 }
 
 export function updateUserRole(userId: string, role: Role) {
@@ -133,6 +134,54 @@ export function findUserByEmail(email: string): (User & { passwordHash: string }
 
 const sha256 = (s: string) => createHash("sha256").update(s).digest("hex");
 
+/**
+ * Key for signing session cookies. SESSION_SECRET if set; otherwise, on hosts
+ * configured with ADMIN_EMAIL/ADMIN_PASSWORD, derived from those (identical on
+ * every instance); otherwise a random key kept in the database.
+ */
+let secret: Buffer | null = null;
+function sessionSecret(): Buffer {
+  if (secret) return secret;
+  const env = process.env.SESSION_SECRET?.trim();
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD?.trim();
+  if (env) secret = createHash("sha256").update(`session:${env}`).digest();
+  else if (email && password) secret = createHash("sha256").update(`session:${email}:${password}`).digest();
+  else {
+    const db = getDb();
+    let row = db.prepare("SELECT value FROM meta WHERE key = 'session_secret'").get() as { value: string } | undefined;
+    if (!row) {
+      db.prepare("INSERT OR IGNORE INTO meta (key, value) VALUES ('session_secret', ?)").run(randomBytes(32).toString("base64"));
+      row = db.prepare("SELECT value FROM meta WHERE key = 'session_secret'").get() as { value: string };
+    }
+    secret = Buffer.from(row.value, "base64");
+  }
+  return secret;
+}
+
+type SessionPayload = { sid: string; email: string; exp: number; pw: string };
+const pwFingerprint = (passwordHash: string) => sha256(passwordHash).slice(0, 16);
+const sign = (body: string) => createHmac("sha256", sessionSecret()).update(body).digest("base64url");
+
+function encodeSession(p: SessionPayload): string {
+  const body = Buffer.from(JSON.stringify(p)).toString("base64url");
+  return `${body}.${sign(body)}`;
+}
+
+function decodeSession(token: string): SessionPayload | null {
+  const [body, sig] = token.split(".");
+  if (!body || !sig) return null;
+  const expected = Buffer.from(sign(body));
+  const given = Buffer.from(sig);
+  if (expected.length !== given.length || !timingSafeEqual(expected, given)) return null;
+  try {
+    const p = JSON.parse(Buffer.from(body, "base64url").toString()) as SessionPayload;
+    return typeof p.email === "string" && typeof p.exp === "number" && p.exp > Date.now() ? p : null;
+  } catch {
+    return null;
+  }
+}
+
 async function isHttps() {
   const h = await headers();
   const proto = h.get("x-forwarded-proto") ?? (h.get("origin")?.startsWith("https:") ? "https" : "");
@@ -140,16 +189,13 @@ async function isHttps() {
 }
 
 export async function startSession(user: User) {
-  const token = randomBytes(32).toString("base64url");
+  const full = findUserByEmail(user.email);
+  if (!full) return;
   const expires = new Date(Date.now() + SESSION_DAYS * 24 * 3600 * 1000);
+  const token = encodeSession({ sid: randomBytes(12).toString("base64url"), email: full.email, exp: expires.getTime(), pw: pwFingerprint(full.passwordHash) });
   const db = getDb();
-  db.prepare("DELETE FROM sessions WHERE expires_at < datetime('now')").run();
-  db.prepare("INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)").run(
-    sha256(token),
-    user.id,
-    expires.toISOString().replace("T", " ").slice(0, 19),
-  );
-  db.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").run(user.id);
+  db.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").run(full.id);
+  db.prepare("DELETE FROM revoked_sessions WHERE expires_at < ?").run(Date.now());
   (await cookies()).set(COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
@@ -163,21 +209,23 @@ export async function startSession(user: User) {
 export async function endSession() {
   const jar = await cookies();
   const token = jar.get(COOKIE)?.value;
-  if (token) getDb().prepare("DELETE FROM sessions WHERE token_hash = ?").run(sha256(token));
+  const p = token ? decodeSession(token) : null;
+  if (p) getDb().prepare("INSERT OR IGNORE INTO revoked_sessions (sid, expires_at) VALUES (?, ?)").run(p.sid, p.exp);
   jar.delete(COOKIE);
 }
 
 /** The signed-in admin user for this request, or null. */
 export const getCurrentUser = cache(async (): Promise<User | null> => {
   const token = (await cookies()).get(COOKIE)?.value;
-  if (!token) return null;
-  const row = getDb()
-    .prepare(
-      `SELECT u.* FROM sessions s JOIN users u ON u.id = s.user_id
-       WHERE s.token_hash = ? AND s.expires_at > datetime('now')`,
-    )
-    .get(sha256(token)) as UserRow | undefined;
-  return row ? toUser(row) : null;
+  const p = token ? decodeSession(token) : null;
+  if (!p) return null;
+  if (getDb().prepare("SELECT 1 FROM revoked_sessions WHERE sid = ?").get(p.sid)) return null;
+  const user = findUserByEmail(p.email);
+  // Deleted user, or password changed since this cookie was issued
+  if (!user || pwFingerprint(user.passwordHash) !== p.pw) return null;
+  const { passwordHash: _omit, ...rest } = user;
+  void _omit;
+  return rest;
 });
 
 /** Use at the top of every admin page and server action. */

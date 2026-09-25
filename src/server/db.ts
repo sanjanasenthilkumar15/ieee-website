@@ -45,6 +45,12 @@ const MIGRATIONS: string[] = [
      action TEXT NOT NULL,
      target TEXT
    );`,
+  // v2: signed session cookies; this table only remembers signed-out sessions
+  `DROP TABLE IF EXISTS sessions;
+   CREATE TABLE IF NOT EXISTS revoked_sessions (
+     sid TEXT PRIMARY KEY,
+     expires_at INTEGER NOT NULL
+   );`,
 ];
 
 let db: DatabaseSync | null = null;
