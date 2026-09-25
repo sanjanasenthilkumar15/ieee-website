@@ -78,19 +78,21 @@ export function Hero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-2xl ring-1 ring-white/15">
+          {/* Shown uncropped (natural 940×539 ratio) so nobody at the edges is cut off. */}
+          <div className="overflow-hidden rounded-lg shadow-2xl ring-1 ring-white/15">
             <Image
               src="/images/execom-2026-group.jpg"
-              alt="The founding 2026 Execom of IEEE SB RMKEC with faculty coordinators"
-              fill
+              alt="The 2026 Execom of IEEE SB RMKEC with faculty coordinators"
+              width={940}
+              height={539}
               priority
               sizes="(min-width: 1024px) 480px, 100vw"
-              className="photo-grade object-cover"
+              className="photo-grade h-auto w-full"
             />
           </div>
           <figcaption className="mt-3 flex items-center gap-2 text-sm text-white/70">
             <span className="h-3 w-3 rounded-full bg-rmkec-green" aria-hidden="true" />
-            Founding Execom, 2026
+            Execom 2026
           </figcaption>
         </motion.figure>
       </Container>

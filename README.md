@@ -1,4 +1,4 @@
-# IEEE Student Branch RMKEC — Website (SB61871)
+# IEEE Student Branch RMKEC — Website (STB61871)
 
 Repository: https://github.com/sanjanasenthilkumar15/ieee-website
 
@@ -82,7 +82,7 @@ src/
     structure.ts          Studio sidebar layout
   fonts/                  Self-hosted Inter variable font (OFL)
 public/
-  logos/                  IEEE SB61871 mark, RMKEC crest
+  logos/                  IEEE STB61871 mark, RMKEC crest
   images/                 Campus aerial, Execom group photo
   content/                Photos, posters and logos used by src/content
 ```
@@ -107,6 +107,6 @@ Tailwind v4 keeps its theme in CSS: see the `@theme static` block in `src/app/gl
 
 ## Still to supply
 
-- A higher-resolution IEEE SB61871 logo, ideally SVG. The current PNG is only 161×72px.
+- A higher-resolution IEEE STB61871 logo, ideally SVG. The current PNG is only 161×72px.
 - `src/lib/site.ts`: the branch email and real social URLs. These are fallbacks until Site Settings is filled in.
 - The approved vision and mission text. The seed script puts in sample text.

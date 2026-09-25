@@ -1,7 +1,7 @@
 /**
  * History timeline. Horizontal on desktop, vertical on mobile.
  * The line always runs on past the latest milestone (dashed, fading out) so
- * a single founding milestone reads as the start of something ongoing.
+ * a single milestone reads as the start of something ongoing.
  * New milestones added in Site Settings slot in automatically.
  */
 type Milestone = { year: number; title: string; description?: string };
@@ -18,7 +18,7 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
           <li key={`${m.year}-${i}`} className="relative flex-1 pr-8" style={{ maxWidth: items.length === 1 ? "38%" : undefined }}>
             <div className="relative flex h-10 items-center">
               {/* segment to the next milestone */}
-              <span className="absolute top-1/2 -right-px left-5 h-[3px] -translate-y-1/2 bg-ieee-blue" aria-hidden="true" />
+              <span className="absolute top-1/2 -right-8 left-5 h-[3px] -translate-y-1/2 bg-ieee-blue" aria-hidden="true" />
               <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ieee-blue ring-4 ring-ieee-blue-light">
                 <span className="h-3 w-3 rounded-full bg-white" />
               </span>

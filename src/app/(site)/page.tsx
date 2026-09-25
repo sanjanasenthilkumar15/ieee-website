@@ -28,7 +28,7 @@ import { formatDate, timeRange } from "@/lib/format";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: { absolute: "IEEE Student Branch RMKEC (SB61871)" },
+  title: { absolute: "IEEE Student Branch RMKEC (STB61871)" },
 };
 
 export default async function HomePage() {
@@ -42,12 +42,14 @@ export default async function HomePage() {
     getExecom(),
   ]);
   const { upcoming, past } = splitEvents(events);
+  const thisYear = new Date().getFullYear();
+  const eventsThisYear = past.filter((e) => new Date(e.startDate).getFullYear() === thisYear).length;
 
   // ---- Stats: Site Settings values win; otherwise derive from content ----
   const latestYear = Math.max(...execom.map((m) => m.year), settings.establishedYear);
   const stats: Stat[] = [
     settings.stats.members ? { label: "IEEE members", value: settings.stats.members, suffix: "+" } : null,
-    { label: "Events held", value: settings.stats.eventsHeld ?? past.length },
+    { label: `Events in ${thisYear}`, value: settings.stats.eventsHeld ?? eventsThisYear },
     { label: "Societies & councils", value: settings.stats.societies ?? societies.length },
     settings.stats.awardsWon ? { label: "Awards won", value: settings.stats.awardsWon } : null,
     { label: "Office bearers", value: execom.filter((m) => m.year === latestYear).length },
@@ -181,7 +183,7 @@ export default async function HomePage() {
                 <h2 className="mt-1 text-3xl font-bold sm:text-4xl">Join IEEE at RMKEC</h2>
                 <p className="mt-3 max-w-2xl text-base leading-relaxed">
                   Connect with IEEE&apos;s technical societies, publications, competitions and a worldwide network of
-                  engineers — and help build the branch from its very first year.
+                  engineers — and grow with the branch at RMKEC.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">

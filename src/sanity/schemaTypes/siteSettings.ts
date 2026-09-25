@@ -32,7 +32,7 @@ export const siteSettings = defineType({
       title: "Branch code",
       type: "string",
       group: "branch",
-      initialValue: "SB61871",
+      initialValue: "STB61871",
     }),
     defineField({
       name: "tagline",
@@ -47,7 +47,7 @@ export const siteSettings = defineType({
       title: "Year established",
       type: "number",
       group: "branch",
-      initialValue: 2026,
+      initialValue: 2009,
       validation: (rule) => rule.required().integer().min(1990).max(2100),
     }),
     defineField({

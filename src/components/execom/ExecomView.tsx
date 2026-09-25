@@ -23,7 +23,6 @@ export function ExecomView({
   societies: Society[];
 }) {
   const latest = years[0];
-  const isFounding = year === Math.min(...years);
   const faculty = members.filter((m) => m.memberType === "faculty");
   const students = members.filter((m) => m.memberType !== "faculty");
   const core = students.filter((m) => m.section !== "chairs");
@@ -34,7 +33,7 @@ export function ExecomView({
   return (
     <>
       <PageHeader
-        eyebrow={isFounding ? "Founding committee" : year === latest ? "Current committee" : "Past committee"}
+        eyebrow={year === latest ? "Current committee" : "Past committee"}
         title={`Execom ${year}`}
         crumbs={[{ label: "Execom", href: "/execom" }, ...(year !== latest ? [{ label: String(year) }] : [])]}
         intro="The office bearers and faculty who lead the IEEE Student Branch at R.M.K. Engineering College."
@@ -97,7 +96,7 @@ export function ExecomView({
 
           {years.length === 1 && (
             <p className="mt-16 rounded-md border border-dashed border-line bg-surface px-5 py-4 text-center text-sm text-muted">
-              No past committees yet — {year} is the branch’s founding year. Check back next year.
+              Earlier committees will be listed here as their details are added.
             </p>
           )}
         </Container>

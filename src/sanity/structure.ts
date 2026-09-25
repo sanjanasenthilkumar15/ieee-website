@@ -11,6 +11,7 @@ import { UsersIcon } from "@sanity/icons/Users";
 import type { StructureResolver } from "sanity/structure";
 import { postTypes } from "./schemaTypes/shared";
 
+// Earliest committee year shown as its own folder (older ones stay under "All members").
 const FIRST_EXECOM_YEAR = 2026;
 
 /**

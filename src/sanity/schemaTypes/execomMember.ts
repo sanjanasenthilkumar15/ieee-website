@@ -21,7 +21,7 @@ export const execomMember = defineType({
       description:
         "The committee this person served on, e.g. 2026. Adding members with a new year makes a “Past Committees” selector appear on the site automatically.",
       initialValue: () => new Date().getFullYear(),
-      validation: (rule) => rule.required().integer().min(2026).max(2100),
+      validation: (rule) => rule.required().integer().min(2009).max(2100),
     }),
     defineField({
       name: "role",

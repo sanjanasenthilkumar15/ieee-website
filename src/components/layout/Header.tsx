@@ -70,7 +70,7 @@ export function Header({ email }: { email?: string }) {
             <span className="text-xs leading-tight text-muted">
               Hosted by
               <br />
-              <span className="font-semibold text-rmkec-green">RMK Engineering College</span>
+              <span className="font-semibold text-rmkec-green">R.M.K. Engineering College</span>
             </span>
           </div>
 

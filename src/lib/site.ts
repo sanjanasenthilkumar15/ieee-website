@@ -6,16 +6,16 @@
 
 export const site = {
   shortName: "IEEE SB RMKEC",
-  name: "IEEE Student Branch, RMK Engineering College",
-  branchCode: "SB61871",
+  name: "IEEE Student Branch, R.M.K. Engineering College",
+  branchCode: "STB61871",
   tagline: "Advancing technology for humanity — from RMKEC, Chennai.",
-  established: 2026,
+  established: 2009,
   // IEEE Madras Section is the section for Chennai, in IEEE Region 10 (Asia-Pacific).
   affiliation: "IEEE Madras Section · IEEE Region 10",
   college: "R.M.K. Engineering College",
-  // TODO(branch): replace with the branch-owned email. Address is from the event posters.
+  // Address is from the event posters.
   contact: {
-    email: "ieee-sb@example.com",
+    email: "ieee.sb@rmkec.ac.in",
     address:
       "R.M.K. Engineering College, RSM Nagar, Kavaraipettai, Gummidipoondi Taluk, Tiruvallur District, Tamil Nadu 601 206",
   },

@@ -12,7 +12,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Vision, mission and history of the IEEE Student Branch at R.M.K. Engineering College (SB61871), established in 2026.",
+    "Vision, mission and history of the IEEE Student Branch at R.M.K. Engineering College (STB61871), established in 2009.",
 };
 
 export default async function AboutPage() {
@@ -112,7 +112,7 @@ export default async function AboutPage() {
             </ul>
           ) : (
             <p className="text-muted">
-              As a branch founded in {s.establishedYear}, our first recognitions are still ahead — they will be listed here.
+              Awards and recognitions received by the branch will be listed here.
             </p>
           )}
         </Container>

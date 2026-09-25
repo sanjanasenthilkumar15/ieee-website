@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — IEEE Student Branch RMKEC (SB #61871)
+ * Design tokens — IEEE Student Branch RMKEC (STB61871)
  *
  * Tailwind v4 reads theme tokens from this @theme block (it replaces the
  * old tailwind.config.js `theme.extend`). Every token below becomes both a

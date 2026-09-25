@@ -35,7 +35,7 @@ npx sanity documents delete sample-achievement-hackathon sample-achievement-pape
 ## Things to check after seeding
 
 - **EDS logo:** the logo in the docx reads "SIT Student Branch Chapter", so it belongs to another college's chapter. Replace it with the plain IEEE EDS logo.
-- **Founding Execom 2026 album:** the date is set to 21 Aug (Inauguration), but that's a guess. Link it to the right event.
+- **Execom 2026 album:** the date is set to 21 Aug (Inauguration), but that's a guess. Link it to the right event.
 - **Branch Sessions 2026 album:** two photos whose events aren't known. Link them to their events.
 - **Event times:** only webinars and the membership drive have times, taken from the posters. Other events are set to show the date only.
 - **Webinar #2 "Cutting Edge":** no speaker or poster was supplied.

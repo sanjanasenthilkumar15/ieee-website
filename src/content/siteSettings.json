@@ -1,8 +1,8 @@
 {
   "branchName": "IEEE Student Branch, R.M.K. Engineering College",
-  "branchCode": "SB61871",
+  "branchCode": "STB61871",
   "tagline": "Advancing technology for humanity — from R.M.K. Engineering College, Chennai.",
-  "establishedYear": 2026,
+  "establishedYear": 2009,
   "vision": "To be a vibrant student community at R.M.K. Engineering College that advances technology for the benefit of humanity.",
   "mission": "To connect students with IEEE's global network of societies, publications and professionals; to build technical and leadership skills through talks, workshops and competitions; and to encourage research, innovation and service to society.",
   "objectives": [
@@ -11,16 +11,20 @@
     "Establish active student chapters of IEEE societies and councils",
     "Support students in publishing research and competing at national and international level"
   ],
-  "stats": {
-    "eventsHeld": 19
-  },
+  "stats": {},
   "milestones": [
     {
-      "year": 2026,
+      "year": 2009,
       "title": "Branch established",
-      "description": "IEEE Student Branch SB61871 is formed at R.M.K. Engineering College, with its founding Execom inaugurated in August."
+      "description": "The IEEE Student Branch (STB61871) is established at R.M.K. Engineering College under the IEEE Madras Section."
+    },
+    {
+      "year": 2026,
+      "title": "Smart Village Student Centre & new Execom",
+      "description": "The IEEE Smart Village Student Centre is inaugurated along with the 2026 office bearers, and a weekly webinar series begins."
     }
   ],
   "address": "R.M.K. Engineering College, RSM Nagar, Kavaraipettai, Gummidipoondi Taluk, Tiruvallur District, Tamil Nadu 601 206, India",
-  "mapUrl": "https://www.google.com/maps/search/?api=1&query=R.M.K.+Engineering+College+Kavaraipettai"
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=R.M.K.+Engineering+College+Kavaraipettai",
+  "contactEmail": "ieee.sb@rmkec.ac.in"
 }

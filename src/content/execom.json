@@ -15,7 +15,8 @@
     "role": "IEEE Coordinator",
     "memberType": "faculty",
     "order": 2,
-    "department": "ECE"
+    "department": "ECE",
+    "photo": "execom/subash-t-d.jpg"
   },
   {
     "id": "rushitha-gandavaram",

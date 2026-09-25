@@ -20,11 +20,11 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "IEEE Student Branch RMKEC (SB #61871)",
+    default: "IEEE Student Branch RMKEC (STB61871)",
     template: "%s | IEEE SB RMKEC",
   },
   description:
-    "Official website of the IEEE Student Branch at R.M.K. Engineering College, Chennai (SB #61871) — events, achievements, publications and membership.",
+    "Official website of the IEEE Student Branch at R.M.K. Engineering College, Chennai (STB61871) — events, achievements, publications and membership.",
 };
 
 /**

@@ -31,7 +31,7 @@ export default function JoinPage() {
       <PageHeader
         title="Join IEEE at RMKEC"
         crumbs={[{ label: "Join" }]}
-        intro="Be part of the branch from its founding year — learn, build and lead with IEEE."
+        intro="Learn, build and lead with IEEE at R.M.K. Engineering College."
       />
 
       <section className="py-16 sm:py-20" aria-labelledby="benefits-h">
