@@ -70,21 +70,30 @@ export function listUsers(): User[] {
  * admin automatically. Once real accounts exist these variables are ignored.
  */
 let envAdminChecked = false;
+/** Why ADMIN_EMAIL / ADMIN_PASSWORD didn't create an account (shown on the sign-in page). Never includes the password. */
+let envAdminProblem: string | null = null;
+export const getEnvAdminProblem = () => envAdminProblem;
 function ensureEnvAdmin() {
   if (envAdminChecked) return;
   envAdminChecked = true;
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const password = process.env.ADMIN_PASSWORD;
-  if (!email || !password) return;
+  // Values pasted into hosting dashboards often pick up a stray space or line break
+  const password = process.env.ADMIN_PASSWORD?.trim();
+  if (!email && !password) return;
+  if (!email) return void (envAdminProblem = "ADMIN_PASSWORD is set but ADMIN_EMAIL is missing or empty.");
+  if (!password) return void (envAdminProblem = "ADMIN_EMAIL is set but ADMIN_PASSWORD is missing or empty.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return void (envAdminProblem = "ADMIN_EMAIL isn’t a valid email address.");
+  const problem = passwordProblem(password);
+  if (problem) return void (envAdminProblem = `ADMIN_PASSWORD is ${password.length} characters. ${problem}`);
   const n = (getDb().prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
   if (n > 0) return;
-  const problem = passwordProblem(password);
-  if (problem) {
-    console.error(`ADMIN_PASSWORD not used: ${problem}`);
-    return;
+  try {
+    createUser({ email, name: process.env.ADMIN_NAME?.trim() || "Admin", role: "admin", password });
+    console.log(`Created admin account ${email} from ADMIN_EMAIL / ADMIN_PASSWORD`);
+  } catch (err) {
+    envAdminProblem = `Couldn’t create the admin account: ${(err as Error).message}`;
   }
-  createUser({ email, name: process.env.ADMIN_NAME?.trim() || "Admin", role: "admin", password });
-  console.log(`Created admin account ${email} from ADMIN_EMAIL / ADMIN_PASSWORD`);
+  if (envAdminProblem) console.error(envAdminProblem);
 }
 
 export function userCount(): number {
