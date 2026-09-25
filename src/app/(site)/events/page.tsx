@@ -4,7 +4,6 @@ import { EventsBrowser } from "@/components/events/EventsBrowser";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getEvents, splitEvents } from "@/lib/content";
 
-export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Events",

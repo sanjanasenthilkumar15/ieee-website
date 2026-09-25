@@ -1,0 +1,22 @@
+# systemd service for Linux servers (Ubuntu/Debian/RHEL).
+# 1. Adjust User and WorkingDirectory below.
+# 2. sudo cp deploy/ieee-sb.service /etc/systemd/system/
+# 3. sudo systemctl daemon-reload && sudo systemctl enable --now ieee-sb
+[Unit]
+Description=IEEE SB RMKEC website
+After=network.target
+
+[Service]
+Type=simple
+User=ieeesb
+WorkingDirectory=/opt/ieee-sb-rmkec
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=SITE_URL=https://ieee.rmkec.ac.in
+Environment=DATA_DIR=/opt/ieee-sb-rmkec/data
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

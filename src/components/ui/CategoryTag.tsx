@@ -4,7 +4,7 @@ import { categoryColor, categoryMeta } from "@/lib/categories";
 export function CategoryTag({ category, label }: { category: string; label?: string }) {
   const text = label ?? categoryMeta[category as keyof typeof categoryMeta]?.label ?? category;
   return (
-    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: categoryColor(category) }}>
+    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: `color-mix(in srgb, ${categoryColor(category)} 68%, #000)` }}>
       {text}
     </span>
   );

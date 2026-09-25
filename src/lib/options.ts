@@ -1,7 +1,5 @@
 /**
- * Option lists shared by the Sanity schemas and the website.
- * Plain data only — no "sanity" import — so site pages can use it without
- * bundling the Studio.
+ * Option lists (departments, event types, …) shared by the website and the admin panel.
  */
 
 // TODO(branch): confirm this matches RMKEC's current department list.

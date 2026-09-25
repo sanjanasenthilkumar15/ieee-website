@@ -74,7 +74,10 @@ export function Footer({
       <div className="border-t border-white/10">
         <Container className="flex flex-col gap-2 py-5 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {site.shortName}. Affiliated with {site.affiliation}.
+            © {year} {site.shortName}. Affiliated with {site.affiliation}.{" "}
+            <Link href="/admin" className="underline-offset-2 hover:text-white hover:underline">
+              Admin
+            </Link>
           </p>
           <p>
             IEEE is a registered trademark of the Institute of Electrical and Electronics Engineers, Inc.

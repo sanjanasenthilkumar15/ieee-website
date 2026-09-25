@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
 // Inter variable font (100–900), self-hosted so builds never depend on
@@ -11,11 +12,6 @@ const inter = localFont({
   display: "swap",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,12 +21,19 @@ export const metadata: Metadata = {
   },
   description:
     "Official website of the IEEE Student Branch at R.M.K. Engineering College, Chennai (STB61871) — events, achievements, publications and membership.",
+  openGraph: {
+    type: "website",
+    siteName: "IEEE SB RMKEC",
+    locale: "en_IN",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "IEEE Student Branch, R.M.K. Engineering College" }],
+  },
+  twitter: { card: "summary_large_image" },
+  robots: process.env.SITE_NOINDEX === "true" ? { index: false, follow: false } : undefined,
 };
 
 /**
  * Root layout: html/body + font only. Public-site chrome (header/footer)
- * lives in app/(site)/layout.tsx so the embedded Sanity Studio at /studio
- * (Phase 2) renders full-screen without it.
+ * lives in app/(site)/layout.tsx; the admin panel (/admin) has its own.
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

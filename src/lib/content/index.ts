@@ -1,77 +1,133 @@
 /**
- * Content API used by every page.
- *
- * - With a Sanity project configured, data comes from Sanity via GROQ.
- * - Without one (fresh clone, demo), it falls back to src/content/*.json.
- *
- * Pages set their own `revalidate` for ISR; fetches are tagged by type so a
- * Sanity webhook (/api/revalidate) can refresh pages as soon as an editor
- * publishes.
+ * Content API used by every public page. Reads from the site's own SQLite
+ * database (src/server/db.ts) and resolves links between documents.
+ * Pages render on each request, so edits made in /admin appear immediately.
  */
+import "server-only";
+import { connection } from "next/server";
 import { cache } from "react";
-import { isSanityConfigured } from "@/sanity/env";
-import { sanityFetch } from "@/sanity/lib/client";
-import * as local from "./local";
-import * as q from "./queries";
+import { getDoc, listDocs } from "@/server/db";
 import type {
-  Achievement,
-  Album,
-  EventItem,
-  ExecomMember,
-  Post,
-  Publication,
-  SiteSettings,
-  Society,
-} from "./types";
+  StoredAchievement,
+  StoredAlbum,
+  StoredEvent,
+  StoredExecomMember,
+  StoredPost,
+  StoredPublication,
+  StoredSettings,
+  StoredSociety,
+} from "./stored";
+import type { Achievement, Album, EventItem, ExecomMember, Post, Publication, SiteSettings, Society } from "./types";
 
 export * from "./types";
 
-/** True when showing offline JSON content instead of Sanity. */
-export const usingLocalContent = !isSanityConfigured;
+const DEFAULT_SETTINGS: SiteSettings = {
+  branchName: "IEEE Student Branch, R.M.K. Engineering College",
+  branchCode: "STB61871",
+  establishedYear: 2009,
+  objectives: [],
+  stats: {},
+  milestones: [],
+  recognitions: [],
+  social: {},
+  mediaCoverage: [],
+};
 
-async function get<T>(query: string, tags: string[], fallback: T, params: Record<string, unknown> = {}) {
-  if (usingLocalContent) return fallback;
-  return sanityFetch<T>({ query, params, tags, fallback: emptyLike(fallback) });
-}
-
-/** On Sanity errors return an empty value of the same kind, never local data. */
-function emptyLike<T>(v: T): T {
-  return (Array.isArray(v) ? [] : null) as T;
+/** Marks the page as rendered per request (content can change at any time in /admin). */
+async function live() {
+  await connection();
 }
 
 export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
-  const s = await get<SiteSettings | null>(q.siteSettingsQuery, ["siteSettings"], local.localSettings);
-  // Sanity may not have the singleton yet: fill gaps from local defaults.
-  return { ...local.localSettings, ...(s ?? {}) } as SiteSettings;
+  await live();
+  const s = getDoc<StoredSettings>("siteSettings");
+  return { ...DEFAULT_SETTINGS, ...(s ?? {}), stats: { ...(s?.stats ?? {}) }, social: { ...(s?.social ?? {}) } };
 });
 
-export const getSocieties = cache(() => get<Society[]>(q.societiesQuery, ["society"], local.localSocieties));
-
-export const getExecom = cache(() => get<ExecomMember[]>(q.execomQuery, ["execomMember"], local.localExecom));
-
-export const getEvents = cache(() => get<EventItem[]>(q.eventsQuery, ["event"], local.localEvents));
-
-export const getEventBySlug = cache(async (slug: string) => {
-  if (usingLocalContent) return local.localEvents.find((e) => e.slug === slug) ?? null;
-  return get<EventItem | null>(q.eventBySlugQuery, ["event"], null, { slug });
+export const getSocieties = cache(async (): Promise<Society[]> => {
+  await live();
+  return listDocs<StoredSociety>("society").sort(
+    (a, b) => (a.order ?? 999) - (b.order ?? 999) || a.name.localeCompare(b.name),
+  );
 });
 
-export const getAchievements = cache(() =>
-  get<Achievement[]>(q.achievementsQuery, ["achievement"], local.localAchievements),
-);
-
-export const getPublications = cache(() =>
-  get<Publication[]>(q.publicationsQuery, ["publication"], local.localPublications),
-);
-
-export const getPosts = cache(() => get<Post[]>(q.postsQuery, ["post"], local.localPosts));
-
-export const getPostBySlug = cache(async (slug: string) => {
-  if (usingLocalContent) return local.localPosts.find((p) => p.slug === slug) ?? null;
-  return get<Post | null>(q.postBySlugQuery, ["post"], null, { slug });
+export const getExecom = cache(async (): Promise<ExecomMember[]> => {
+  await live();
+  return listDocs<StoredExecomMember>("execomMember").sort(
+    (a, b) => b.year - a.year || (a.order ?? 999) - (b.order ?? 999) || a.name.localeCompare(b.name),
+  );
 });
 
-export const getAlbums = cache(() => get<Album[]>(q.albumsQuery, ["galleryAlbum", "event"], local.localAlbums));
+const societyLookup = cache(async () => new Map((await getSocieties()).map((s) => [s.id, s])));
+
+function toEvent(e: StoredEvent, societies: Map<string, Society>): EventItem {
+  const { societyIds, ...rest } = e;
+  return {
+    ...rest,
+    speakers: e.speakers ?? [],
+    agenda: e.agenda ?? [],
+    societies: (societyIds ?? [])
+      .map((id) => societies.get(id))
+      .filter((s): s is Society => Boolean(s))
+      .map(({ id, name, shortName }) => ({ id, name, shortName })),
+  };
+}
+
+export const getEvents = cache(async (): Promise<EventItem[]> => {
+  await live();
+  const societies = await societyLookup();
+  return listDocs<StoredEvent>("event")
+    .map((e) => toEvent(e, societies))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+});
+
+export const getEventBySlug = cache(async (slug: string) => (await getEvents()).find((e) => e.slug === slug) ?? null);
+
+const eventRef = cache(async () => {
+  const map = new Map<string, { slug: string; title: string }>();
+  for (const e of listDocs<StoredEvent>("event")) map.set(e.id, { slug: e.slug, title: e.title });
+  return map;
+});
+
+export const getAchievements = cache(async (): Promise<Achievement[]> => {
+  await live();
+  return listDocs<StoredAchievement>("achievement")
+    .map(({ proof, showProof, ...a }) => ({ ...a, featured: Boolean(a.featured), proofUrl: showProof ? proof?.url : undefined }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+});
+
+export const getPublications = cache(async (): Promise<Publication[]> => {
+  await live();
+  return listDocs<StoredPublication>("publication").sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+});
+
+export const getPosts = cache(async (): Promise<Post[]> => {
+  await live();
+  const events = await eventRef();
+  return listDocs<StoredPost>("post")
+    .map(({ relatedEventId, attachment, ...p }) => ({
+      ...p,
+      relatedEvent: relatedEventId ? events.get(relatedEventId) : undefined,
+      attachmentUrl: attachment?.url,
+      attachmentName: attachment?.name,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+});
+
+export const getPostBySlug = cache(async (slug: string) => (await getPosts()).find((p) => p.slug === slug) ?? null);
+
+export const getAlbums = cache(async (): Promise<Album[]> => {
+  await live();
+  const events = await eventRef();
+  return listDocs<StoredAlbum>("galleryAlbum")
+    .map(({ eventId, ...a }) => ({
+      ...a,
+      photos: a.photos ?? [],
+      videos: a.videos ?? [],
+      event: eventId ? events.get(eventId) : undefined,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+});
 
 // ---------- helpers ----------
 
@@ -83,9 +139,7 @@ export function eventEnds(e: Pick<EventItem, "startDate" | "endDate" | "hideTime
 }
 
 export function splitEvents(events: EventItem[], now = new Date()) {
-  const upcoming = events
-    .filter((e) => eventEnds(e) >= now)
-    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+  const upcoming = events.filter((e) => eventEnds(e) >= now).sort((a, b) => a.startDate.localeCompare(b.startDate));
   const past = events.filter((e) => eventEnds(e) < now).sort((a, b) => b.startDate.localeCompare(a.startDate));
   return { upcoming, past };
 }

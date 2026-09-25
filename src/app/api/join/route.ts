@@ -1,13 +1,19 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { isSanityConfigured } from "@/sanity/env";
-import { writeClient } from "@/sanity/lib/writeClient";
 import { validateJoin } from "@/lib/join";
+import { saveDoc } from "@/server/db";
+import { rateLimit } from "@/server/rateLimit";
 
 /**
- * POST /api/join — stores a Join Us submission as a `membershipApplication`
- * document in Sanity (status "new"). Office bearers review it in the Studio.
+ * POST /api/join — stores a Join Us submission in the site database as an
+ * "application" (status "new"). Office bearers review it in /admin.
  */
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  if (!rateLimit(`join:${ip}`, 5, 60 * 60 * 1000)) {
+    return NextResponse.json({ error: "Too many submissions. Please try again later." }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await request.json();
@@ -21,25 +27,17 @@ export async function POST(request: Request) {
   // Honeypot filled in → almost certainly a bot. Pretend success.
   if (data.website) return NextResponse.json({ ok: true }, { status: 201 });
 
-  if (!isSanityConfigured || !process.env.SANITY_API_WRITE_TOKEN) {
-    console.warn("[join] Sanity not configured — application not stored:", data.email);
-    return NextResponse.json(
-      { error: "Online applications aren’t open yet. Please contact the branch by email." },
-      { status: 503 },
-    );
-  }
-
   try {
-    await writeClient.create({
-      _type: "membershipApplication",
-      status: "new",
+    const id = `application-${randomUUID()}`;
+    saveDoc("application", id, {
       name: data.name,
-      department: data.department,
-      year: data.year,
       email: data.email,
       phone: data.phone,
+      department: data.department,
+      year: data.year,
       reason: data.reason,
       submittedAt: new Date().toISOString(),
+      status: "new",
     });
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (err) {

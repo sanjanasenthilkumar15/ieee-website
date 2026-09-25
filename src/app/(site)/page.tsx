@@ -25,7 +25,6 @@ import {
 } from "@/lib/content";
 import { formatDate, timeRange } from "@/lib/format";
 
-export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: { absolute: "IEEE Student Branch RMKEC (STB61871)" },

@@ -21,14 +21,10 @@ import { CategoryTag } from "@/components/ui/CategoryTag";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { RichText } from "@/components/ui/RichText";
 import { categoryColor } from "@/lib/categories";
-import { eventEnds, getAlbums, getEventBySlug, getEvents } from "@/lib/content";
+import { eventEnds, getAlbums, getEventBySlug } from "@/lib/content";
 import { formatDate, timeRange } from "@/lib/format";
 
-export const revalidate = 300;
 
-export async function generateStaticParams() {
-  return (await getEvents()).map((e) => ({ slug: e.slug }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
   const event = await getEventBySlug((await params).slug);
@@ -200,12 +196,12 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
               <div className="rounded-lg border border-line bg-white">
                 <dl className="divide-y divide-line">
                   {facts.map(({ icon: Icon, label, value }) => (
-                    <div key={label} className="flex gap-3 p-4">
-                      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-ieee-blue" aria-hidden="true" />
-                      <div>
-                        <dt className="text-xs font-semibold tracking-wider text-muted uppercase">{label}</dt>
-                        <dd className="font-medium text-ink">{value}</dd>
-                      </div>
+                    <div key={label} className="relative p-4 pl-12">
+                      <dt className="text-xs font-semibold tracking-wider text-muted uppercase">
+                        <Icon className="absolute top-4.5 left-4 h-5 w-5 text-ieee-blue" aria-hidden="true" />
+                        {label}
+                      </dt>
+                      <dd className="font-medium text-ink">{value}</dd>
                     </div>
                   ))}
                 </dl>

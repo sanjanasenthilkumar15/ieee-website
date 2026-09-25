@@ -9,7 +9,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { execomYears, getExecom, getSiteSettings } from "@/lib/content";
 import { site } from "@/lib/site";
 
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Contact",

@@ -5,7 +5,6 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getAchievements } from "@/lib/content";
 
-export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Achievements",

@@ -4,37 +4,35 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && node scripts/postbuild.mjs",
+    "start": "node --no-warnings=ExperimentalWarning scripts/start.mjs",
     "lint": "eslint",
-    "seed": "node --env-file=.env.local scripts/seed/seed.mjs",
-    "seed:samples": "node --env-file=.env.local scripts/seed/seed.mjs --with-samples",
-    "seed:check": "node scripts/seed/seed.mjs --dry-run --with-samples",
-    "schema:validate": "sanity schema validate",
-    "content:manifest": "node scripts/content-manifest.mjs"
+    "content:manifest": "node scripts/content-manifest.mjs",
+    "admin:create": "node --no-warnings=ExperimentalWarning scripts/create-admin.mjs",
+    "backup": "node --no-warnings=ExperimentalWarning scripts/backup.mjs"
   },
   "dependencies": {
-    "@sanity/client": "^8.7.0",
-    "@sanity/icons": "^5.2.2",
-    "@sanity/image-url": "^2.1.1",
     "framer-motion": "^13.4.2",
     "lucide-react": "^1.48.0",
     "next": "16.3.6",
-    "next-sanity": "^13.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "sanity": "^6.16.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
-    "styled-components": "^6.5.3"
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22.20.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.13"
   }
 }

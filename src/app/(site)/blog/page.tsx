@@ -5,7 +5,6 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getPosts } from "@/lib/content";
 
-export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Blog & Newsletter",

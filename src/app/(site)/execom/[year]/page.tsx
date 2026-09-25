@@ -3,12 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { ExecomView } from "@/components/execom/ExecomView";
 import { execomYears, getExecom, getSocieties } from "@/lib/content";
 
-export const revalidate = 3600;
 
-export async function generateStaticParams() {
-  const years = execomYears(await getExecom());
-  return years.slice(1).map((y) => ({ year: String(y) }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/execom/[year]">): Promise<Metadata> {
   const { year } = await params;

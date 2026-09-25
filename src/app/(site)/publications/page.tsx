@@ -7,7 +7,6 @@ import { RichText } from "@/components/ui/RichText";
 import { getPublications } from "@/lib/content";
 import { researchAreas } from "@/lib/options";
 
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Publications",

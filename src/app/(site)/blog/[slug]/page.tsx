@@ -7,14 +7,10 @@ import { postTypeLabel } from "@/components/cards/PostCard";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { RichText } from "@/components/ui/RichText";
-import { getPostBySlug, getPosts } from "@/lib/content";
+import { getPostBySlug } from "@/lib/content";
 import { formatDate } from "@/lib/format";
 
-export const revalidate = 300;
 
-export async function generateStaticParams() {
-  return (await getPosts()).map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ExecomView } from "@/components/execom/ExecomView";
 import { execomYears, getExecom, getSocieties } from "@/lib/content";
 
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Execom",

@@ -1,0 +1,13 @@
+# docker compose up -d --build
+# Site on http://<server>:3000 — put nginx/Apache with HTTPS in front (see DEPLOY.md).
+services:
+  web:
+    build: .
+    image: ieee-sb-rmkec
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      SITE_URL: "https://ieee.rmkec.ac.in" # change to the real address
+    volumes:
+      - ./data:/data # database + uploads live here — back this folder up

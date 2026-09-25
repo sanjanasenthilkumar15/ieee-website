@@ -7,7 +7,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getSiteSettings } from "@/lib/content";
 
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About",
@@ -51,7 +50,7 @@ export default async function AboutPage() {
               <ol className="grid gap-4 sm:grid-cols-2">
                 {s.objectives.map((o, i) => (
                   <li key={i} className="flex gap-4 rounded-lg border border-line bg-surface p-5">
-                    <span className="text-3xl leading-none font-extrabold text-ieee-blue/30 tabular-nums">
+                    <span className="text-3xl leading-none font-extrabold text-ieee-blue/70 tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="pt-1 leading-relaxed text-ink">{o}</span>

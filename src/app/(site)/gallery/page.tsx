@@ -12,7 +12,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getAlbums, getEvents, getSiteSettings, splitEvents } from "@/lib/content";
 import { formatDate } from "@/lib/format";
 
-export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Gallery",

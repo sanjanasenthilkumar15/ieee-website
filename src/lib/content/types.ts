@@ -1,9 +1,7 @@
-import type { PortableTextBlock } from "next-sanity";
-
 /**
- * Normalised content shapes used by every page. Both data sources — Sanity
- * (GROQ projections in queries.ts) and the offline JSON fallback (local.ts)
- * — return exactly these shapes, so components never care which is active.
+ * Content shapes used by every page. The database stores documents in the
+ * shapes in stored.ts; the content layer (index.ts) resolves references
+ * (e.g. society IDs → names) and returns these.
  */
 
 export type Img = {
@@ -11,11 +9,12 @@ export type Img = {
   alt: string;
   width: number;
   height: number;
-  /** Tiny blurred placeholder (Sanity only). */
+  /** Tiny blurred placeholder (optional). */
   lqip?: string;
 };
 
-export type RichText = PortableTextBlock[];
+/** Rich text is stored as Markdown (headings, lists, bold, links). */
+export type RichText = string;
 
 export type SiteSettings = {
   branchName: string;
@@ -150,4 +149,19 @@ export type Album = {
   event?: { slug: string; title: string };
   photos: (Img & { caption?: string })[];
   videos: { title?: string; url: string }[];
+};
+
+export type FileRef = { url: string; name: string };
+
+export type Application = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  department: string;
+  year: string;
+  reason: string;
+  submittedAt: string;
+  status: "new" | "reviewed";
+  notes?: string;
 };
