@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/admin/components/LoginForm";
 import { getCurrentUser, userCount } from "@/server/auth";
+import { STORAGE_IS_TEMPORARY } from "@/server/config";
 
 export const metadata = { title: "Sign in" };
 
@@ -25,6 +26,12 @@ export default async function LoginPage({ searchParams }: PageProps<"/admin/logi
               No admin accounts exist yet. On the server, in the project folder, run:
               <code className="mt-2 block rounded bg-white px-2 py-1 font-mono text-xs">npm run admin:create</code>
               then come back to sign in.
+              {STORAGE_IS_TEMPORARY && (
+                <span className="mt-3 block">
+                  On a host without a terminal (such as a Vercel review copy), set the <code className="font-mono text-xs">ADMIN_EMAIL</code> and{" "}
+                  <code className="font-mono text-xs">ADMIN_PASSWORD</code> environment variables and redeploy.
+                </span>
+              )}
             </div>
           ) : (
             <LoginForm next={typeof next === "string" ? next : ""} />

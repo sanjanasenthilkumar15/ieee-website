@@ -64,7 +64,31 @@ export function listUsers(): User[] {
   return (getDb().prepare("SELECT * FROM users ORDER BY role, name").all() as UserRow[]).map(toUser);
 }
 
+/**
+ * Hosts without a shell (e.g. a Vercel review copy) can't run `npm run admin:create`.
+ * If ADMIN_EMAIL and ADMIN_PASSWORD are set and no accounts exist yet, create that
+ * admin automatically. Once real accounts exist these variables are ignored.
+ */
+let envAdminChecked = false;
+function ensureEnvAdmin() {
+  if (envAdminChecked) return;
+  envAdminChecked = true;
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password) return;
+  const n = (getDb().prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
+  if (n > 0) return;
+  const problem = passwordProblem(password);
+  if (problem) {
+    console.error(`ADMIN_PASSWORD not used: ${problem}`);
+    return;
+  }
+  createUser({ email, name: process.env.ADMIN_NAME?.trim() || "Admin", role: "admin", password });
+  console.log(`Created admin account ${email} from ADMIN_EMAIL / ADMIN_PASSWORD`);
+}
+
 export function userCount(): number {
+  ensureEnvAdmin();
   return (getDb().prepare("SELECT COUNT(*) AS n FROM users").get() as { n: number }).n;
 }
 
@@ -91,6 +115,7 @@ export function deleteUser(userId: string) {
 }
 
 export function findUserByEmail(email: string): (User & { passwordHash: string }) | null {
+  ensureEnvAdmin();
   const r = getDb().prepare("SELECT * FROM users WHERE email = ?").get(email.trim().toLowerCase()) as UserRow | undefined;
   return r ? { ...toUser(r), passwordHash: r.password_hash } : null;
 }
